@@ -1,33 +1,15 @@
-console.log('Try npm run lint/fix!');
+import router from "./router/Router";
+import express from "express";
 
-const longString =
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut aliquet diam.';
 
-const trailing = 'Semicolon';
+const app = express();
+const port = 3000;
 
-const why = {am: 'I tabbed?'};
+app.use(express.json());
+app.use("/api/picker", router);
 
-const iWish = "I didn't have a trailing space...";
+const server = app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});
 
-const sicilian = true;
-
-const vizzini = sicilian ? !sicilian : sicilian;
-
-const re = /foo {3}bar/;
-
-export function doSomeStuff(
-    withThis: string,
-    andThat: string,
-    andThose: string[]
-) {
-    //function on one line
-    if (!andThose.length) {
-        return false;
-    }
-    console.log(withThis);
-    console.log(andThat);
-    console.dir(andThose);
-    console.log(longString, trailing, why, iWish, vizzini, re);
-    return;
-}
-// TODO: more examples
+export default server;

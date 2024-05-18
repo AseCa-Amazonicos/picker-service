@@ -1,0 +1,40 @@
+datasource db {
+    url      = env("DATABASE_URL")
+    provider = "postgresql"
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Order {
+    id             Int         @id @default(autoincrement())
+    createdAt      DateTime    @default(now())
+    updatedAt      DateTime    @updatedAt
+    status         OrderStatus
+    total          Float
+    cart           Cart        @relation(fields: [cartId], references: [id])
+    cartId         Int
+    deliveryAdress String
+}
+
+enum OrderStatus {
+    PREPARING
+    DELIVERING
+    DELIVERED
+}
+
+model Cart {
+    id    Int     @id @default(autoincrement())
+    items Item[]
+    Order Order[]
+}
+
+model Item {
+    id       Int    @id @default(autoincrement())
+    name     String
+    price    Float
+    quantity Int
+    cart     Cart   @relation(fields: [cartId], references: [id])
+    cartId   Int
+}
