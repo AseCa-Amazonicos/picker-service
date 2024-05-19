@@ -73,23 +73,4 @@ export class OrderRepository implements OrderRepositoryInterface {
         }
     }
 
-    async getActualStock(): Promise<StockQuantity[]> {
-        try {
-            const stocks = await this.prismaClient.stock.groupBy({
-                by: ['name'],
-                _sum: {
-                    quantity: true,
-                },
-            });
-
-            return stocks.map(stock => {
-                return {
-                    itemName: stock.name,
-                    quantity: stock._sum.quantity || 0,
-                };
-            });
-        } catch (e) {
-            throw new Error('Failed to get actual stock');
-        }
-    }
 }

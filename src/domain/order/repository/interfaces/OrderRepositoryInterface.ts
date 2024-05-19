@@ -6,5 +6,4 @@ export interface OrderRepositoryInterface {
     addOrder(id: number, orderStatus: OrderStatus, items: Item[]) : Promise<Order | null>;
     getOrder(orderId: number) : Promise<Status | null>;
     getAllOrders() : Promise<Status[]>;
-    getActualStock() : Promise<StockQuantity[]>;
 }

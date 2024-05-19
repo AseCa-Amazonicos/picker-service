@@ -38,12 +38,4 @@ export class OrderController implements OrderControllerInterface {
         res.status(500).send('Failed to get all orders');
     }
 
-    async getActualStock(req: any, res: any): Promise<void> {
-        const stock = await this.orderService.getActualStock();
-        if (stock) {
-            res.status(200).json(stock);
-            return;
-        }
-        res.status(500).send('Failed to get actual stock');
-    }
 }

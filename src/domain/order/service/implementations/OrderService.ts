@@ -39,11 +39,4 @@ export class OrderService implements OrderServiceInterface {
         throw new Error('Failed to get all orders');
     }
 
-    async getActualStock(): Promise<StockQuantity[]> {
-        const stock = await this.orderRepository.getActualStock();
-        if (stock) {
-            return stock;
-        }
-        throw new Error('Failed to get actual stock');
-    }
 }

@@ -31,6 +31,7 @@ model Item {
 
 model Stock {
     id          Int       @id @default(autoincrement())
+    productId   Int
     name        String
     quantity    Int
     warehouse   Warehouse @relation(fields: [warehouseId], references: [id])
