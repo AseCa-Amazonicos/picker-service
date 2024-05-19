@@ -7,8 +7,8 @@ import {StockRepository} from '../domain/stock/repository/implementations/StockR
 import {StockService} from '../domain/stock/service/implementations/StockService';
 import {StockController} from '../domain/stock/controller/implementations/StockController';
 import {PickerController} from '../domain/picker/controller/implementations/PickerController';
-import {PickerRepository} from "../domain/picker/repository/implementations/PickerRepository";
-import {PickerService} from "../domain/picker/service/implementations/PickerService";
+import {PickerRepository} from '../domain/picker/repository/implementations/PickerRepository';
+import {PickerService} from '../domain/picker/service/implementations/PickerService';
 
 const router = Router();
 

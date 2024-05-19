@@ -1,7 +1,7 @@
 import {OrderServiceInterface} from '../interfaces/OrderServiceInterface';
 import {OrderRepository} from '../../repository/implementations/OrderRepository';
 import {Item, Order, OrderStatus} from '@prisma/client';
-import {Status, StockQuantity} from "../../../../utils/OrderUtils";
+import {Status} from '../../../../utils/OrderUtils';
 
 export class OrderService implements OrderServiceInterface {
     orderRepository: OrderRepository;
@@ -10,12 +10,20 @@ export class OrderService implements OrderServiceInterface {
         this.orderRepository = orderRepository;
     }
 
-    async addOrder(id: number, orderStatus: OrderStatus, items: Item[]): Promise<Order | null> {
+    async addOrder(
+        id: number,
+        orderStatus: OrderStatus,
+        items: Item[]
+    ): Promise<Order | null> {
         const isValidId = await this.getOrder(id);
         if (isValidId) {
             return null;
         }
-        const order = await this.orderRepository.addOrder(id, orderStatus, items);
+        const order = await this.orderRepository.addOrder(
+            id,
+            orderStatus,
+            items
+        );
         if (order) {
             return order;
         }
@@ -34,9 +42,7 @@ export class OrderService implements OrderServiceInterface {
         const statusArray = await this.orderRepository.getAllOrders();
         if (statusArray) {
             return statusArray;
-
         }
         throw new Error('Failed to get all orders');
     }
-
 }

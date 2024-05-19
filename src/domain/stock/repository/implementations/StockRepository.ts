@@ -47,14 +47,14 @@ export class StockRepository implements StockRepositoryInterface {
             }
 
             const existingStocks = await this.prismaClient.stock.findMany({
-                where: { productId: productId, warehouseId: warehouseId },
+                where: {productId: productId, warehouseId: warehouseId},
             });
 
             if (existingStocks && existingStocks.length > 0) {
                 const existingStock = existingStocks[0];
                 await this.prismaClient.stock.update({
-                    where: { id: existingStock.id },
-                    data: { quantity: { increment: quantity } },
+                    where: {id: existingStock.id},
+                    data: {quantity: {increment: quantity}},
                 });
             } else {
                 await this.prismaClient.stock.create({

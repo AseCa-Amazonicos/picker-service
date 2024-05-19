@@ -1,9 +1,8 @@
-import {StockQuantity} from "../../../../utils/OrderUtils";
-import {StockRepository} from "../../repository/implementations/StockRepository";
-import {StockServiceInterface} from "../interfaces/StockServiceInterface";
+import {StockQuantity} from '../../../../utils/OrderUtils';
+import {StockRepository} from '../../repository/implementations/StockRepository';
+import {StockServiceInterface} from '../interfaces/StockServiceInterface';
 
 export class StockService implements StockServiceInterface {
-
     stockRepository: StockRepository;
 
     constructor(stockRepository: StockRepository) {
@@ -18,7 +17,17 @@ export class StockService implements StockServiceInterface {
         throw new Error('Failed to get actual stock');
     }
 
-    async addStock(productId: number, quantity: number, name: string, warehouseId: number): Promise<boolean> {
-        return await this.stockRepository.addStock(productId, quantity, name, warehouseId);
+    async addStock(
+        productId: number,
+        quantity: number,
+        name: string,
+        warehouseId: number
+    ): Promise<boolean> {
+        return await this.stockRepository.addStock(
+            productId,
+            quantity,
+            name,
+            warehouseId
+        );
     }
 }

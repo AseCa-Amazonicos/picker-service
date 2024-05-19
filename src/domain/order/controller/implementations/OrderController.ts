@@ -16,7 +16,7 @@ export class OrderController implements OrderControllerInterface {
             res.status(200).json(order);
             return;
         }
-        res.status(500).json({ message: 'Failed to add order' });
+        res.status(500).json({message: 'Failed to add order'});
     }
 
     async getOrder(req: any, res: any): Promise<void> {
@@ -26,7 +26,9 @@ export class OrderController implements OrderControllerInterface {
             res.status(200).json(order);
             return;
         }
-        res.status(500).json({ message: `Failed to get order with order id: ${orderId}` });
+        res.status(500).json({
+            message: `Failed to get order with order id: ${orderId}`,
+        });
     }
 
     async getAllOrders(req: any, res: any): Promise<void> {
@@ -37,5 +39,4 @@ export class OrderController implements OrderControllerInterface {
         }
         res.status(500).send('Failed to get all orders');
     }
-
 }

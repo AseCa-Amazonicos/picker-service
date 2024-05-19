@@ -1,6 +1,6 @@
 import {OrderRepositoryInterface} from '../interfaces/OrderRepositoryInterface';
 import {Item, Order, OrderStatus, PrismaClient} from '@prisma/client';
-import {Status, StockQuantity} from '../../../../utils/OrderUtils';
+import {Status} from '../../../../utils/OrderUtils';
 
 export class OrderRepository implements OrderRepositoryInterface {
     prismaClient: PrismaClient;
@@ -72,5 +72,4 @@ export class OrderRepository implements OrderRepositoryInterface {
             throw new Error('Failed to get all orders');
         }
     }
-
 }
