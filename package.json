@@ -8,7 +8,8 @@
         "pretest": "npm run compile",
         "posttest": "npm run lint",
         "dev": "nodemon ./src/index.ts --exec ts-node",
-        "test": "jest"
+        "test": "jest",
+        "start": "npm run dev"
     },
     "dependencies": {
         "@prisma/client": "^5.14.0",

@@ -1,15 +1,15 @@
 {
-    "extends": "./node_modules/gts/tsconfig-google.json",
+//    "extends": "./node_modules/gts/tsconfig-google.json",
     "compilerOptions": {
         "target": "es6",
         "module": "CommonJS",
         "esModuleInterop": true,
-        "rootDir": "./src",
+//        "rootDir": "./src",
         "outDir": "build"
     },
-    "include": [
-        "src/**/*.ts",
-        "test/**/*.ts"
-    ],
-    "exclude": ["node_modules"]
+//    "include": [
+//        "src/**/*.ts",
+//        "test/**/*.ts"
+//    ],
+//    "exclude": ["node_modules"]
 }
