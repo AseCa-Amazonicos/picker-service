@@ -9,6 +9,9 @@ import {StockController} from '../domain/stock/controller/implementations/StockC
 import {PickerController} from '../domain/picker/controller/implementations/PickerController';
 import {PickerRepository} from '../domain/picker/repository/implementations/PickerRepository';
 import {PickerService} from '../domain/picker/service/implementations/PickerService';
+import {WarehouseService} from '../domain/warehouse/service/implementations/WarehouseService';
+import {WarehouseController} from '../domain/warehouse/controller/implementations/WarehouseController';
+import {WarehouseRepository} from '../domain/warehouse/repository/implementations/WarehouseRepository';
 
 const router = Router();
 
@@ -24,6 +27,10 @@ const stockController = new StockController(stockService);
 const pickerRepository = new PickerRepository(prismaClient);
 const pickerService = new PickerService(pickerRepository, orderRepository);
 const pickerController = new PickerController(pickerService);
+
+const warehouseRepository = new WarehouseRepository(prismaClient);
+const warehouseService = new WarehouseService(warehouseRepository);
+const warehouseController = new WarehouseController(warehouseService);
 
 //Communication with control tower
 router.post('/order/add_order', (req, res) => {
@@ -47,13 +54,17 @@ router.put('/stock/add_stock', (req, res) => {
     stockController.addStock(req, res);
 });
 
-//sacar el stock del warehouse y cambiar el estado de la orden a preparing
 router.put('/picker/prepare_order', (req, res) => {
     pickerController.prepareOrder(req, res);
 });
 
 router.put('/picker/ready_to_ship', (req, res) => {
     pickerController.readyToShip(req, res);
+});
+
+//warehouse
+router.post('/warehouse/create', (req, res) => {
+    warehouseController.createWarehouse(req, res);
 });
 
 export default router;

@@ -47,6 +47,7 @@ export class OrderRepository implements OrderRepositoryInterface {
             return {
                 orderId: order.id,
                 status: order.status,
+                item: order.items,
             };
         } catch (e) {
             return null;
@@ -65,6 +66,7 @@ export class OrderRepository implements OrderRepositoryInterface {
                 return {
                     orderId: order.id,
                     status: order.status,
+                    item: order.items,
                 };
             });
         } catch (e) {
