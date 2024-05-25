@@ -10,6 +10,10 @@ export class WarehouseService implements WarehouseServiceInterface {
     }
 
     async createWarehouse(name: string): Promise<Warehouse> {
-        return await this.warehouseRepository.createWarehouse(name);
+        const warehouse = await this.warehouseRepository.createWarehouse(name);
+        if (!warehouse) {
+            throw new Error('Warehouse not created');
+        }
+        return warehouse;
     }
 }
