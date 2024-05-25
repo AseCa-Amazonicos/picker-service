@@ -1,23 +1,18 @@
+version: '3.8'
+
 services:
-    postgresql:
+    picker-db:
+        image: postgres:16
         container_name: picker-service-postgresql
-        image: postgres
         environment:
             POSTGRES_USER: ${POSTGRES_USER}
             POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-            PGDATA: /data/postgres
-        volumes:
-            - postgres:/data/postgres
+            POSTGRES_DB: picker-db
         ports:
-            - '5432:5432'
-        networks:
-            - postgres
-        restart: unless-stopped
-
-
-networks:
-    postgres:
-        driver: bridge
+            - "5433:5432"
+        volumes:
+            - postgres_picker:/data/postgres
+        restart: always
 
 volumes:
-    postgres:
+    postgres_picker:
