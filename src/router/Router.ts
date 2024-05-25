@@ -54,7 +54,6 @@ router.put('/stock/add_stock', (req, res) => {
     stockController.addStock(req, res);
 });
 
-//sacar el stock del warehouse y cambiar el estado de la orden a preparing
 router.put('/picker/prepare_order', (req, res) => {
     pickerController.prepareOrder(req, res);
 });
@@ -63,6 +62,7 @@ router.put('/picker/ready_to_ship', (req, res) => {
     pickerController.readyToShip(req, res);
 });
 
+//warehouse
 router.post('/warehouse/create', (req, res) => {
     warehouseController.createWarehouse(req, res);
 });
