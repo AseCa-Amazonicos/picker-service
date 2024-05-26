@@ -60,13 +60,14 @@ function showIfHidden() {
 function handlePrepareOrder(orderId) {
     prepareOrder(orderId).then(() => {
         getOrderDetail(orderId);
+        renderCatalog();
     }).catch(error => console.error('Error:', error));
 }
 
 function handleMakeReadyOrder(orderId) {
     markReadyOrder(orderId).then(() => {
         getOrderDetail(orderId);
-        renderCatalog();
+
     }).catch(error => console.error('Error:', error));
 }
 
