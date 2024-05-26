@@ -19,7 +19,7 @@ test: will run jest for test
 you should set the pre-commit to run npm test
 
 ## start service
-1. made a .env file by coping and pasting the .env-template in the .env
+1. make a .env file by coping and pasting the .env-template in the .env
 2. run `docker-compose up -d`
 3. run `prisma migrate dev`
 4. `npm start`
