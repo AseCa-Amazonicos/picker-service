@@ -15,7 +15,7 @@ function catalogHTML(res){
         const div = document.createElement('div');
         div.classList.add('catalog-item');
         div.innerHTML = `
-                <span>${item.itemName} - Warehouse 1</span> <!--TODO: item.location-->
+                <span>${item.itemName} - ${item.warehouseName}</span> <!--TODO: item.location-->
                 <span>Cantidad: ${item.quantity}</span>
             `;
         catalogList.appendChild(div);

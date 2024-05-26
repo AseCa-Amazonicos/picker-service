@@ -41,7 +41,7 @@ nav button:hover {
     background-color: #005f7f;
 }
 
-#orders-container, #order-detail-container, #catalog-container, #add-stock-container {
+#orders-container, #order-detail-container, #catalog-container, #add-stock-container, #add-warehouse-container {
     margin-bottom: 20px;
 }
 

@@ -32,12 +32,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     renderCatalog();  // Define this function as needed
                 } else if (type === 'stock') {
                     stockContent.innerHTML = html;
-                } else if (type === 'stock-with-error') {
+                }
+                else if (type === 'warehouse') {
                     stockContent.innerHTML = html;
-                    const errorMessage = document.getElementById('error-message');
-                    if (errorMessage) {
-                        errorMessage.classList.remove("hidden");
-                    }
                 }
             })
             .catch(error => console.error('Error loading content:', error));
