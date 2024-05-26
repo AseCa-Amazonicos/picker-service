@@ -35,7 +35,7 @@ export class OrderService implements OrderServiceInterface {
         if (status) {
             return status;
         }
-        return null;
+        return null; // no entinedo, si no existe el id te devuelve null? se rompe todo
     }
 
     async getAllOrders(): Promise<Status[]> {

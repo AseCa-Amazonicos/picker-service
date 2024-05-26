@@ -1,18 +1,21 @@
-<div id="add-stock-container" >
+<div id="add-stock-container">
     <h2>Añadir Stock</h2>
-    <form id="add-stock-form">
-        <div class="form-group">
-            <label for="item-name">Nombre del Item:</label>
-            <input type="text" id="item-name" required>
-        </div>
-        <div class="form-group">
-            <label for="item-location">Ubicación:</label>
-            <input type="text" id="item-location" required>
-        </div>
-        <div class="form-group">
-            <label for="item-quantity">Cantidad:</label>
-            <input type="number" id="item-quantity" required>
-        </div>
-        <button type="submit">Añadir</button>
-    </form>
+    <div class="form-group">
+        <label for="item-id">Id del Producto:</label>
+        <input type="text" id="item-id" required>
+    </div>
+    <div class="form-group">
+        <label for="item-name">Nombre del Producto:</label>
+        <input type="text" id="item-name" required>
+    </div>
+    <div class="form-group">
+        <label for="item-location">ID del Warehouse:</label>
+        <input type="text" id="item-location" required>
+    </div>
+    <div class="form-group">
+        <label for="item-quantity">Cantidad:</label>
+        <input type="number" id="item-quantity" required>
+    </div>
+    <button id="add-stock-button" onclick="addStock()">Añadir</button>
+    <p id="error-message" class="hidden">Error adding stock. Please try again.</p>
 </div>

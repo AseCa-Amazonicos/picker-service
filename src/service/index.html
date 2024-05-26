@@ -10,8 +10,9 @@
 <div class="container">
     <h1>Catalogo</h1>
     <nav>
-        <button id="view-catalog">Ver Catálogo</button>
+        <button id="view-catalog">Ver Stock</button>
         <button id="add-stock">Añadir Stock</button>
+        <button id="add-warehouse">Añadir Warehouse</button>
     </nav>
     <div id="stock-content"></div>
 </div>
@@ -21,9 +22,12 @@
         <button id="view-orders">Ver Pedidos</button>
     </nav>
     <div id="order-content"></div>
+    <div id="error-message" style="color: red;" class="hidden">Stock could not be added.</div>
 </div>
 <script src="scripts/script.js"></script>
 <script src="scripts/orders.js"></script>
 <script src="scripts/catalog.js"></script>
+<script src="scripts/orderDetail.js"></script>
+<script src="scripts/endpoints.js"></script>
 </body>
 </html>

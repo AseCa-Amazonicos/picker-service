@@ -1,4 +1,5 @@
-// script.js
+const apiURL = 'http://localhost:3000/api/picker';
+
 document.addEventListener('DOMContentLoaded', function() {
     const orderContent = document.getElementById('order-content');
     const stockContent = document.getElementById('stock-content');
@@ -15,6 +16,10 @@ document.addEventListener('DOMContentLoaded', function() {
         loadContent('add-stock.html', 'stock');
     });
 
+    document.getElementById('add-warehouse').addEventListener('click', function() {
+        loadContent('add-warehouse.html', 'warehouse');
+    })
+
     function loadContent(url, type) {
         fetch(url)
             .then(response => response.text())
@@ -27,9 +32,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     renderCatalog();  // Define this function as needed
                 } else if (type === 'stock') {
                     stockContent.innerHTML = html;
+                } else if (type === 'stock-with-error') {
+                    stockContent.innerHTML = html;
+                    const errorMessage = document.getElementById('error-message');
+                    if (errorMessage) {
+                        errorMessage.classList.remove("hidden");
+                    }
                 }
             })
-            .catch(error => console.error('Error al cargar el contenido:', error));
+            .catch(error => console.error('Error loading content:', error));
     }
 
 });
