@@ -22,5 +22,5 @@ function catalogHTML(res){
     });
 }
 
-// For adding new stock to the catalog.
+
 

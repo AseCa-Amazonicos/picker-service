@@ -7,7 +7,7 @@ const port = 3000;
 
 // Define CORS options to restrict access
 const corsOptions = {
-    origin: 'http://localhost:63342', // Allow only this origin
+    origin: 'http://localhost:3001', // Allow only this origin
     optionsSuccessStatus: 200 // Some legacy browsers choke on 204
 };
 
