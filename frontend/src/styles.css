@@ -1,0 +1,125 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+    margin: 20px
+}
+
+h1, h2 {
+    margin-bottom: 20px;
+}
+
+nav {
+    margin-bottom: 20px;
+}
+
+nav button {
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #008cba;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+nav button:hover {
+    background-color: #005f7f;
+}
+
+#orders-container, #order-detail-container, #catalog-container, #add-stock-container, #add-warehouse-container {
+    margin-bottom: 20px;
+}
+
+#orders-list, #order-detail-list, #catalog-list {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.order-item, .order-detail-item, .catalog-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button {
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#complete-order {
+    background-color: #4caf50;
+    color: white;
+}
+
+#incomplete-order {
+    background-color: #f44336;
+    color: white;
+}
+
+#back-to-orders {
+    background-color: #008cba;
+    color: white;
+}
+
+#notification {
+    font-size: 1.2em;
+    color: #333;
+}
+
+.hidden {
+    display: none;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: calc(100% - 20px);
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#add-stock-form button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#add-stock-form button:hover {
+    background-color: #388e3c;
+}

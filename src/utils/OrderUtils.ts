@@ -9,6 +9,7 @@ export type Status = {
 export type StockQuantity = {
     itemName: string;
     quantity: number;
+    warehouseName: string;
 };
 
 export type StockProductId = {

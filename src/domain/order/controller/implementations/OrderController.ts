@@ -10,6 +10,7 @@ export class OrderController implements OrderControllerInterface {
 
     async addOrder(req: any, res: any): Promise<void> {
         const {orderStatus, items} = req.body;
+        console.log(req.body)
         const id = Number(req.body.id);
         const order = await this.orderService.addOrder(id, orderStatus, items);
         if (order) {
@@ -20,7 +21,9 @@ export class OrderController implements OrderControllerInterface {
     }
 
     async getOrder(req: any, res: any): Promise<void> {
-        const orderId = Number(req.body.orderId);
+        // THIS IS A PROPOSAL, (Preguntarle a Chulo, la verdad que no sé de back)
+        // el hecho es que un GET no permite body, entonces uso query.
+        const orderId = Number(req.query.orderId);
         const order = await this.orderService.getOrder(orderId);
         if (order) {
             res.status(200).json(order);

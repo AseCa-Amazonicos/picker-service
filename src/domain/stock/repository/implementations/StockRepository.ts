@@ -11,19 +11,28 @@ export class StockRepository implements StockRepositoryInterface {
 
     async getActualStock(): Promise<StockQuantity[]> {
         try {
-            const stocks = await this.prismaClient.stock.groupBy({
-                by: ['name'],
-                _sum: {
-                    quantity: true,
+            const stocks = await this.prismaClient.stock.findMany({
+                include: {
+                    warehouse: true,
                 },
             });
 
-            return stocks.map(stock => {
-                return {
-                    itemName: stock.name,
-                    quantity: stock._sum.quantity || 0,
-                };
+            const groupedStocks: {[key: string]: StockQuantity} = {};
+
+            stocks.forEach(stock => {
+                const key = `${stock.name}-${stock.warehouseId}`;
+                if (groupedStocks[key]) {
+                    groupedStocks[key].quantity += stock.quantity;
+                } else {
+                    groupedStocks[key] = {
+                        itemName: stock.name,
+                        quantity: stock.quantity,
+                        warehouseName: stock.warehouse.name,
+                    };
+                }
             });
+
+            return Object.values(groupedStocks);
         } catch (e) {
             throw new Error('Failed to get actual stock');
         }

@@ -1,0 +1,22 @@
+/* src/App.css */
+.container {
+    padding: 20px;
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: blue;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.hidden {
+    display: none;
+}
