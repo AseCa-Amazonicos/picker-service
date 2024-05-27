@@ -49,6 +49,10 @@ router.get('/stock/get_actual_stock', (req, res) => {
     stockController.getActualStock(req, res);
 });
 
+router.get('/stock/get_actual_stock_product_id', (req, res) => {
+    stockController.getActualStockWProductId(req, res);
+});
+
 //Communication with ui
 router.put('/stock/add_stock', (req, res) => {
     stockController.addStock(req, res);

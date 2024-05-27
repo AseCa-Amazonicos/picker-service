@@ -1,4 +1,4 @@
-import {StockQuantity} from '../../../../utils/OrderUtils';
+import {StockProductId, StockQuantity} from '../../../../utils/OrderUtils';
 import {StockRepository} from '../../repository/implementations/StockRepository';
 import {StockServiceInterface} from '../interfaces/StockServiceInterface';
 
@@ -29,5 +29,13 @@ export class StockService implements StockServiceInterface {
             name,
             warehouseId
         );
+    }
+
+    async getActualStockWProductId(): Promise<StockProductId[]> {
+        const stock = await this.stockRepository.getActualStockWProductId();
+        if (stock) {
+            return stock;
+        }
+        throw new Error('Failed to get actual stock');
     }
 }

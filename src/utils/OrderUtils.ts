@@ -10,3 +10,8 @@ export type StockQuantity = {
     itemName: string;
     quantity: number;
 };
+
+export type StockProductId = {
+    productId: number;
+    quantity: number;
+};

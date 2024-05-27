@@ -1,4 +1,4 @@
-import {StockQuantity} from '../../../../utils/OrderUtils';
+import {StockProductId, StockQuantity} from '../../../../utils/OrderUtils';
 
 export interface StockServiceInterface {
     getActualStock(): Promise<StockQuantity[]>;
@@ -9,4 +9,6 @@ export interface StockServiceInterface {
         name: string,
         warehouseId: number
     ): Promise<boolean>;
+
+    getActualStockWProductId(): Promise<StockProductId[]>
 }

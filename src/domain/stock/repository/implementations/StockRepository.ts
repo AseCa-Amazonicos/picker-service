@@ -1,4 +1,4 @@
-import {StockQuantity} from '../../../../utils/OrderUtils';
+import {StockProductId, StockQuantity} from '../../../../utils/OrderUtils';
 import {PrismaClient} from '@prisma/client';
 import {StockRepositoryInterface} from '../interfaces/StockRepositoryInterface';
 
@@ -21,6 +21,26 @@ export class StockRepository implements StockRepositoryInterface {
             return stocks.map(stock => {
                 return {
                     itemName: stock.name,
+                    quantity: stock._sum.quantity || 0,
+                };
+            });
+        } catch (e) {
+            throw new Error('Failed to get actual stock');
+        }
+    }
+
+    async getActualStockWProductId(): Promise<StockProductId[]> {
+        try {
+            const stocks = await this.prismaClient.stock.groupBy({
+                by: ['productId'],
+                _sum: {
+                    quantity: true,
+                },
+            });
+
+            return stocks.map(stock => {
+                return {
+                    productId: stock.productId,
                     quantity: stock._sum.quantity || 0,
                 };
             });
