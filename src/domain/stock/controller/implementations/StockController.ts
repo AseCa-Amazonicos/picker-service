@@ -14,16 +14,16 @@ export class StockController implements StockControllerInterface {
             res.status(200).json(stock);
             return;
         }
-        res.status(500).send('Failed to get actual stock');
+        else{
+            res.status(500).send('Failed to get actual stock');
+        }
     }
 
     async addStock(req: any, res: any): Promise<void> {
-        const productId = Number(req.body.productId);
         const quantity = Number(req.body.quantity);
         const productName = req.body.name;
         const warehouseId = Number(req.body.warehouseId);
         const wasStockAdded = await this.stockService.addStock(
-            productId,
             quantity,
             productName,
             warehouseId

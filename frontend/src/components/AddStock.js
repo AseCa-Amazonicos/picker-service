@@ -4,7 +4,6 @@ import {addStock} from '../services/api';
 import '../styles.css';
 
 const AddStock = () => {
-    const [itemId, setItemId] = useState('');
     const [itemName, setItemName] = useState('');
     const [itemLocation, setItemLocation] = useState('');
     const [itemQuantity, setItemQuantity] = useState('');
@@ -12,14 +11,12 @@ const AddStock = () => {
 
     const handleAddStock = () => {
         addStock({
-            productId: Number(itemId),
             quantity: Number(itemQuantity),
             name: itemName,
             warehouseId: Number(itemLocation),
         })
             .then(() => {
                 setErrorMessage('');
-                setItemId('');
                 setItemName('');
                 setItemLocation('');
                 setItemQuantity('');
@@ -33,16 +30,16 @@ const AddStock = () => {
     return (
         <div id="add-stock-container">
             <h2>Añadir Stock</h2>
-            <div className="form-group">
-                <label htmlFor="item-id">Id del Producto:</label>
-                <input
-                    type="text"
-                    id="item-id"
-                    value={itemId}
-                    onChange={e => setItemId(e.target.value)}
-                    required
-                />
-            </div>
+            {/*<div className="form-group">*/}
+            {/*    <label htmlFor="item-id">Id del Producto:</label>*/}
+            {/*    <input*/}
+            {/*        type="text"*/}
+            {/*        id="item-id"*/}
+            {/*        value={itemId}*/}
+            {/*        onChange={e => setItemId(e.target.value)}*/}
+            {/*        required*/}
+            {/*    />*/}
+            {/*</div>*/}
             <div className="form-group">
                 <label htmlFor="item-name">Nombre del Producto:</label>
                 <input

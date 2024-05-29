@@ -26,7 +26,7 @@ const Catalog = () => {
                 <div>Loading...</div>
             ) : (
                 <div id="catalog-list">
-                    {catalog.map(item => (
+                    {catalog.length !== 0 && catalog.map(item => (
                         <div key={item.itemId} className="catalog-item">
                             <span>{item.itemName} - {item.warehouseName}</span>
                             <span>Cantidad: {item.quantity}</span>

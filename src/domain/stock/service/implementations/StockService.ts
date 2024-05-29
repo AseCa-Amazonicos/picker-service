@@ -1,6 +1,8 @@
 import {StockProductId, StockQuantity} from '../../../../utils/OrderUtils';
 import {StockRepository} from '../../repository/implementations/StockRepository';
 import {StockServiceInterface} from '../interfaces/StockServiceInterface';
+import axios from "axios";
+import {Product} from "../../../../utils/Product";
 
 export class StockService implements StockServiceInterface {
     stockRepository: StockRepository;
@@ -18,13 +20,13 @@ export class StockService implements StockServiceInterface {
     }
 
     async addStock(
-        productId: number,
         quantity: number,
         name: string,
         warehouseId: number
     ): Promise<boolean> {
+        const product: Product = await this.addProductInCT(name)
         return await this.stockRepository.addStock(
-            productId,
+            product.id,
             quantity,
             name,
             warehouseId
@@ -37,5 +39,23 @@ export class StockService implements StockServiceInterface {
             return stock;
         }
         throw new Error('Failed to get actual stock');
+    }
+
+    async addProductInCT(
+        name: string,
+    ): Promise<Product> {
+        // console.log("Calling the picker service...");
+        return axios.post(`http://localhost:8080/api/product`, {
+            "name": name,
+            "price": 1
+        })
+            .then(response => {
+                // Process the response data
+                // console.log(response.data);
+                return response.data;
+            })
+            .catch(error => {
+                console.error('There was a problem with the request:', error);
+            });
     }
 }
