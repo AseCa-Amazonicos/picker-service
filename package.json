@@ -1,4 +1,7 @@
 {
+    "name": "picker-service",
+    "version": "1.0.1",
+    "private": true,
     "scripts": {
         "lint": "gts lint",
         "clean": "gts clean",
