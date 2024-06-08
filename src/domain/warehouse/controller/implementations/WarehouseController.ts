@@ -19,4 +19,13 @@ export class WarehouseController implements WarehouseControllerInterface {
             res.status(500).json({message: (error as Error).message});
         }
     }
+
+    async getWarehouses(req: any, res: any): Promise<void> {
+        const warehouses = await this.warehouseService.getWarehouses();
+        if (warehouses) {
+            res.status(200).json(warehouses);
+            return;
+        }
+        res.status(500).send('Failed to get warehouses');
+    }
 }

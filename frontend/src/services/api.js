@@ -88,3 +88,8 @@ export const markReadyOrder = orderId =>
             }
         })
         .catch(error => console.error('Error:', error));
+
+export const getWarehouses = () =>
+    fetch(`${apiURL}/warehouse/get_all`)
+        .then(response => response.json())
+        .catch(error => console.error('Error:', error));

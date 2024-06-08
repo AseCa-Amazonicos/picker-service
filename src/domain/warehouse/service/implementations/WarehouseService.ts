@@ -16,4 +16,12 @@ export class WarehouseService implements WarehouseServiceInterface {
         }
         return warehouse;
     }
+
+    async getWarehouses(): Promise<Warehouse[]> {
+        const warehouses = await this.warehouseRepository.getWarehouses();
+        if (warehouses) {
+            return warehouses;
+        }
+        throw new Error('Failed to get warehouses');
+    }
 }

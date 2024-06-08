@@ -1,4 +1,5 @@
 import {StockProductId, StockQuantity} from '../../../../utils/OrderUtils';
+import {Warehouse} from '@prisma/client';
 
 export interface StockServiceInterface {
     getActualStock(): Promise<StockQuantity[]>;
@@ -9,5 +10,5 @@ export interface StockServiceInterface {
         warehouseId: number
     ): Promise<boolean>;
 
-    getActualStockWProductId(): Promise<StockProductId[]>
+    getActualStockWProductId(): Promise<StockProductId[]>;
 }

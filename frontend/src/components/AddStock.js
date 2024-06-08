@@ -1,45 +1,47 @@
 // src/components/AddStock.js
-import React, {useState} from 'react';
-import {addStock} from '../services/api';
+import React, {useEffect, useState} from 'react';
+import {addStock, getWarehouses} from '../services/api';
 import '../styles.css';
 
 const AddStock = () => {
     const [itemName, setItemName] = useState('');
-    const [itemLocation, setItemLocation] = useState('');
     const [itemQuantity, setItemQuantity] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [warehouses, setWarehouses] = useState([]);
+    const [selectedWarehouseId, setSelectedWarehouseId] = useState('');
 
     const handleAddStock = () => {
         addStock({
             quantity: Number(itemQuantity),
             name: itemName,
-            warehouseId: Number(itemLocation),
+            warehouseId: Number(selectedWarehouseId),
         })
             .then(() => {
+                console.log('Successfully added stock');
                 setErrorMessage('');
                 setItemName('');
-                setItemLocation('');
                 setItemQuantity('');
             })
             .catch(error => {
-                console.error('Error:', error);
+                console.error('Error adding stock:', error);
                 setErrorMessage('Error adding stock. Please try again.');
             });
     };
 
+    useEffect(() => {
+        getWarehouses()
+            .then(data => {
+                setWarehouses(data);
+                setSelectedWarehouseId(data[0]?.id);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }, []);
+
     return (
         <div id="add-stock-container">
             <h2>Añadir Stock</h2>
-            {/*<div className="form-group">*/}
-            {/*    <label htmlFor="item-id">Id del Producto:</label>*/}
-            {/*    <input*/}
-            {/*        type="text"*/}
-            {/*        id="item-id"*/}
-            {/*        value={itemId}*/}
-            {/*        onChange={e => setItemId(e.target.value)}*/}
-            {/*        required*/}
-            {/*    />*/}
-            {/*</div>*/}
             <div className="form-group">
                 <label htmlFor="item-name">Nombre del Producto:</label>
                 <input
@@ -51,14 +53,19 @@ const AddStock = () => {
                 />
             </div>
             <div className="form-group">
-                <label htmlFor="item-location">ID del Warehouse:</label>
-                <input
-                    type="text"
+                <label htmlFor="item-location">Warehouse:</label>
+                <select
                     id="item-location"
-                    value={itemLocation}
-                    onChange={e => setItemLocation(e.target.value)}
+                    value={selectedWarehouseId}
+                    onChange={e => setSelectedWarehouseId(e.target.value)}
                     required
-                />
+                >
+                    {warehouses.map(warehouse => (
+                        <option key={warehouse.id} value={warehouse.id}>
+                            {warehouse.name}
+                        </option>
+                    ))}
+                </select>
             </div>
             <div className="form-group">
                 <label htmlFor="item-quantity">Cantidad:</label>

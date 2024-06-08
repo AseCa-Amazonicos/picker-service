@@ -32,39 +32,56 @@ describe('Warehouse and Stock Management', () => {
             },
             {
                 statusCode: 200,
-                body: {warehouseId: 3, productId: 10, quantity: 100},
+                body: {warehouseId: 3, productId: 10, quantity: 10},
             }
         ).as('getStock');
 
+        cy.intercept(
+            {
+                method: 'GET',
+                url: '/api/picker/stock/get_actual_stock',
+            },
+            {
+                statusCode: 200,
+                body: [],
+            }
+        ).as('getInitialStock');
+
+        cy.visit('http://localhost:3002');
+        cy.wait(5000);
+        cy.wait('@getInitialStock');
+
         // Visit the app
-        cy.visit('http://localhost:3001/add-warehouse'); // Navigate to the correct route
+        cy.visit('http://localhost:3002/add-warehouse'); // Navigate to the correct route
 
         // Wait for the #warehouse-name-input element to appear
         cy.get('#warehouse-name').type('Palermo');
-        cy.wait(1000);
+        cy.wait(5000);
         cy.get('#add-warehouse-button').then($button => {
-            cy.wait(1000); // Wait for 1 second
             $button.click();
         });
         cy.wait('@createWarehouse');
 
+        cy.intercept('GET', '/api/picker/warehouse/get_all', {
+            statusCode: 200,
+            body: [{id: 3, name: 'Palermo'}],
+        });
+
         // Navigate to the add stock page
-        cy.visit('http://localhost:3001/add-stock');
+        cy.visit('http://localhost:3002/add-stock');
 
         // Add stock
-        cy.get('#item-id').type('10');
-        cy.wait(1000);
         cy.get('#item-name').type('Mate');
-        cy.wait(1000);
+        cy.wait(5000);
         cy.get('#item-location').type('3');
-        cy.wait(1000);
+        cy.wait(5000);
         cy.get('#item-quantity').type('100');
-        cy.wait(1000);
+        cy.wait(5000);
         cy.get('#add-stock-button').click();
         cy.wait('@addStock');
 
         // Navigate to the catalog page
-        cy.visit('http://localhost:3001/');
+        cy.visit('http://localhost:3002/');
 
         // Mock the API response for getting all stock
         cy.intercept(
@@ -87,7 +104,7 @@ describe('Warehouse and Stock Management', () => {
         ).as('getAllStock');
 
         // Navigate to the catalog page
-        cy.visit('http://localhost:3001/');
+        cy.visit('http://localhost:3002/');
 
         // Wait for the getAllStock API call to complete
         cy.wait('@getAllStock');
@@ -95,7 +112,7 @@ describe('Warehouse and Stock Management', () => {
         // Check if the added product is present in the catalog
         cy.contains('Mate').should('be.visible'); // Replace 'Mate' with the actual name of the product
 
-        cy.wait(3000);
+        cy.wait(5000);
 
         // Mock the API response for getting all orders
         cy.intercept(
@@ -113,7 +130,7 @@ describe('Warehouse and Stock Management', () => {
                             {
                                 itemId: 10,
                                 name: 'Mate', // Changed from 'itemName' to 'name'
-                                quantity: 100,
+                                quantity: 10,
                             },
                         ],
                     },
@@ -122,7 +139,7 @@ describe('Warehouse and Stock Management', () => {
         ).as('getAllOrders');
 
         // Navigate to the orders page
-        cy.visit('http://localhost:3001/orders');
+        cy.visit('http://localhost:3002/orders');
 
         // Wait for the getAllOrders API call to complete
         cy.wait('@getAllOrders');
@@ -130,7 +147,7 @@ describe('Warehouse and Stock Management', () => {
         // Check if the order is present in the list
         cy.contains('Pedido #1');
 
-        cy.wait(3000);
+        cy.wait(5000);
 
         // Mock the API response for getting an order by ID
         cy.intercept(
@@ -147,7 +164,7 @@ describe('Warehouse and Stock Management', () => {
                         {
                             itemId: 10,
                             name: 'Mate',
-                            quantity: 100,
+                            quantity: 10,
                         },
                     ],
                 },
@@ -157,5 +174,41 @@ describe('Warehouse and Stock Management', () => {
         // Click on the order to view the details
         cy.contains('Pedido #1').click();
         cy.wait('@getOrderByOrderId');
+
+        cy.intercept(
+            {
+                method: 'PUT',
+                url: '/api/picker/picker/prepare_order',
+            },
+            {
+                statusCode: 200,
+                body: {
+                    orderId: 1,
+                    status: 'IN_PROGRESS',
+                },
+            }
+        ).as('startOrder');
+
+        // Start the order
+        cy.get('#complete-order').click();
+
+        cy.wait(5000);
+
+        cy.intercept(
+            {
+                method: 'PUT',
+                url: '/api/picker/picker/ready_to_ship',
+            },
+            {
+                statusCode: 200,
+                body: {
+                    orderId: 1,
+                    status: 'READY_TO_SHIP',
+                },
+            }
+        ).as('completeOrder');
+
+        // Complete the order
+        cy.get('#complete-order').click();
     });
 });

@@ -71,4 +71,8 @@ router.post('/warehouse/create', (req, res) => {
     warehouseController.createWarehouse(req, res);
 });
 
+router.get('/warehouse/get_all', (req, res) => {
+    warehouseController.getWarehouses(req, res);
+});
+
 export default router;

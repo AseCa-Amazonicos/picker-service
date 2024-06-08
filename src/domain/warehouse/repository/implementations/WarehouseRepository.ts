@@ -24,4 +24,12 @@ export class WarehouseRepository implements WarehouseRepositoryInterface {
         if (warehouse) return warehouse;
         else throw new Error('Warehouse not created');
     }
+
+    async getWarehouses() {
+        try {
+            return await this.prismaClient.warehouse.findMany();
+        } catch (e) {
+            throw new Error('Failed to get warehouses');
+        }
+    }
 }
