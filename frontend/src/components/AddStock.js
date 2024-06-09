@@ -10,21 +10,25 @@ const AddStock = () => {
     const [errorMessage, setErrorMessage] = useState('');
 
     const handleAddStock = () => {
-        addStock({
-            quantity: Number(itemQuantity),
-            name: itemName,
-            warehouseId: Number(itemLocation),
-        })
-            .then(() => {
-                setErrorMessage('');
-                setItemName('');
-                setItemLocation('');
-                setItemQuantity('');
+        if (itemQuantity > 0) {
+            addStock({
+                quantity: Number(itemQuantity),
+                name: itemName,
+                warehouseId: Number(itemLocation),
             })
-            .catch(error => {
-                console.error('Error:', error);
-                setErrorMessage('Error adding stock. Please try again.');
-            });
+                .then(() => {
+                    setErrorMessage('');
+                    setItemName('');
+                    setItemLocation('');
+                    setItemQuantity('');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    setErrorMessage('Error adding stock. Please try again.');
+                });
+        }else{
+            alert("The quantity should be bigger than zero")
+        }
     };
 
     return (
